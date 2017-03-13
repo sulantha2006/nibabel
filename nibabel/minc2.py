@@ -173,5 +173,16 @@ class Minc2Image(Minc1Image):
         data = klass.ImageArrayProxy(minc_file)
         return klass(data, affine, header, extra=None, file_map=file_map)
 
+    def to_file_map(self, file_map=None):
+        if file_map is None:
+            file_map = self.file_map
+
+    @classmethod
+    def from_image(klass, img):
+        if isinstance(img, klass):
+            return img
+
 
 load = Minc2Image.load
+
+save = Minc2Image.instance_to_filename
